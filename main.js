@@ -11,6 +11,25 @@ let counter = 0;
 
 let groceryList = [];
 
+let currentStorage = localStorage.getItem('pink-bag');
+
+currentStorage = JSON.parse(currentStorage);
+
+if (currentStorage === null) {
+
+  console.log('storage is empty');
+  
+}else{
+  currentStorage.forEach(function (groceryItem){
+    let liEl = document.createElement('El');
+    
+    liEl.innerHTML = groceryItem.name;
+    
+    parent.appendChild(El);
+  });
+}
+
+
 btn.addEventListener('click',addToList);
 
 function addToList(){
@@ -29,28 +48,32 @@ function addToList(){
     id: counter,
     name: myWord,
   }
-    
-   groceryList = [...groceryList, groceryItem];
-   
-   groceryList.push(groceryItem);
-
-
+addToStorage(groceryItem);
+}
+  
 
 function addToStorage(data){
-  let myStorage = localStorage
-  .getItem('pink-bag');
+  let myStorage = localStorage.getItem('pink-bag');
   
   if (myStorage === null) {
+    
     console.log('there is nothing');
     
+    groceryList = [...groceryList, data];
+    
+    let dataJSON = JSON.stringify(groceryList);
+    
+    localStorage.setItem('pink-bag', dataJSON);
+  }else{
+    let oldList = JSON.parse(myStorage);
+    
+  oldList = [... oldList, data];
+  localStorage.setItem('pink-bag', JSON.stringify(oldList));
   }
-  
-  
 }
 
-addToList();
 
-}
+
 
 
 
