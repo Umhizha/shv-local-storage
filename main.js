@@ -16,16 +16,13 @@ let currentStorage = localStorage.getItem('pink-bag');
 currentStorage = JSON.parse(currentStorage);
 
 if (currentStorage === null) {
-
-  console.log('storage is empty');
-  
 }else{
   currentStorage.forEach(function (groceryItem){
-    let liEl = document.createElement('El');
+    let liEl = document.createElement('li');
     
     liEl.innerHTML = groceryItem.name;
     
-    parent.appendChild(El);
+    parent.appendChild(liEl);
   });
 }
 
